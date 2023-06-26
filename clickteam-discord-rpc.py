@@ -86,6 +86,7 @@ def update_presence():
 
     prev_project_name = None
     start_time = int(time.time())
+    clickteam_found = False
 
     while True:
         try:
@@ -97,6 +98,8 @@ def update_presence():
                     project_name, frame_name, window_title = get_active_project_info()
 
                     if project_name:
+                        clickteam_found = True
+
                         if project_name != prev_project_name:
                             start_time = int(time.time())
                             prev_project_name = project_name
@@ -127,6 +130,7 @@ def update_presence():
                                 large_text="Clickteam Fusion"
                             )
                     else:
+                        clickteam_found = False
                         rpc.clear()
 
                 except Exception:
@@ -136,7 +140,10 @@ def update_presence():
 
                 time.sleep(15)
         except DiscordNotFound:
-            time.sleep(5)
+            rpc.clear()
+            if not clickteam_found:
+                time.sleep(5)
+
 
 def main():
     tray_icon = create_system_tray_icon()
