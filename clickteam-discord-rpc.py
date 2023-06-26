@@ -18,8 +18,10 @@ from pypresence.exceptions import DiscordNotFound
 import threading
 import asyncio
 import sysconfig
+import psutil
 import tempfile
 import pkg_resources
+import win32gui
 import tkinter as tk
 from PIL import Image, ImageTk
 from pystray import MenuItem as item
@@ -30,28 +32,34 @@ client_id = "1122799602035339314"
 def get_active_project_info():
     try:
         fusion_window = None
-        for window in gw.getAllWindows():
-            if "Clickteam Fusion" in window.title:
-                fusion_window = window
-                break
+        target_title = "Clickteam Fusion"
 
-        if fusion_window is None:
-            return None, None, None
+        def callback(hwnd, hwnds):
+            if win32gui.IsWindowVisible(hwnd) and win32gui.GetWindowText(hwnd).startswith(target_title):
+                hwnds.append(hwnd)
 
-        if "Clickteam Fusion" not in fusion_window.title:
-            return None, None, None
+        hwnds = []
+        win32gui.EnumWindows(callback, hwnds)
 
-        window_title_parts = fusion_window.title.split(" - ")
-        project_name = window_title_parts[1].split("[")[-1].split("]")[0].strip()
+        if hwnds:
+            fusion_window = hwnds[0]
 
-        if len(window_title_parts) > 2:
-            frame_name = window_title_parts[-1].rstrip("]")
-        else:
-            frame_name = None
+            window_title_parts = win32gui.GetWindowText(fusion_window).split(" - ")
+            project_name = window_title_parts[1].split("[")[-1].split("]")[0].strip()
 
-        return project_name, frame_name, fusion_window.title
+            if len(window_title_parts) > 2:
+                frame_name = window_title_parts[-1].rstrip("]")
+            else:
+                frame_name = None
+
+            return project_name, frame_name, win32gui.GetWindowText(fusion_window)
+
+        return None, None, None
+
     except IndexError:
         return None, None, None
+
+
 
 
 def show_about_dialog(icon, item):
