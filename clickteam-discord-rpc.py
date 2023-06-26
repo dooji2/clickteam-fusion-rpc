@@ -5,8 +5,8 @@
 # GitHub: https://github.com/dooji2
 # Discord: dooji_
 
-# Last Modified: ‎Monday, ‎June ‎26, ‎2023, ‏‎1:34:08 PM
-# Modified By: Dooji (doojisbasement@gmail.com)
+# Last Modified: ‎Monday, ‎June ‎26, ‎2023, ‏‎1:40:17 PM
+# Modified By: Dooji
 
 # Copyright (c) 2023 Dooji
 import sys
@@ -36,6 +36,9 @@ def get_active_project_info():
                 break
 
         if fusion_window is None:
+            return None, None, None
+
+        if "Clickteam Fusion" not in fusion_window.title:
             return None, None, None
 
         window_title_parts = fusion_window.title.split(" - ")
