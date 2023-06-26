@@ -1,3 +1,14 @@
+# File: clickteam-discord-rpc.py
+# Project: clickteam-discord-RPC
+# File Created: Saturday, ‎Monday, ‎June ‎26, ‎2023, ‏‎9:03:14 AM
+# Author: Dooji (doojisbasement@gmail.com)
+# GitHub: https://github.com/dooji2
+# Discord: dooji_
+
+# Last Modified: ‎Monday, ‎June ‎26, ‎2023, ‏‎1:24:07 PM
+# Modified By: Dooji (doojisbasement@gmail.com)
+
+# Copyright (c) 2023 Dooji
 import sys
 import time
 import os
