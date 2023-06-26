@@ -13,3 +13,6 @@ Clickteam Fusion Discord Rich Presence is a program written in Python to let all
 ### Support/Suggestions Discord server?
 
 Depending on how much attention this gets, I may create one.
+
+# License
+[GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
