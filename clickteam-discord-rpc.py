@@ -5,7 +5,7 @@
 # GitHub: https://github.com/dooji2
 # Discord: dooji_
 
-# Last Modified: ‎Monday, ‎June ‎26, ‎2023, ‏‎1:33:12 PM
+# Last Modified: ‎Monday, ‎June ‎26, ‎2023, ‏‎1:34:08 PM
 # Modified By: Dooji (doojisbasement@gmail.com)
 
 # Copyright (c) 2023 Dooji
@@ -65,7 +65,7 @@ def show_about_dialog(icon, item):
     icon_label.image = icon_photo
     icon_label.pack(pady=20)
 
-    credits_label = tk.Label(about_window, text="Author: Dooji\nVersion: 1.0.1\nhttps://github.com/dooji2/clickteam-fusion-rpc/")
+    credits_label = tk.Label(about_window, text="Author: Dooji\nVersion: 1.0.2\nhttps://github.com/dooji2/clickteam-fusion-rpc/")
     credits_label.pack()
 
     about_window.eval('tk::PlaceWindow . center')
