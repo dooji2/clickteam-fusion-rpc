@@ -1,14 +1,4 @@
-# File: clickteam-discord-rpc.py
-# Project: clickteam-discord-RPC
-# File Created: Saturday, ‎Monday, ‎June ‎26, ‎2023, ‏‎9:03:14 AM
-# Author: Dooji (doojisbasement@gmail.com)
-# GitHub: https://github.com/dooji2
-# Discord: dooji_
-
-# Last Modified: ‎Monday, ‎June ‎26, ‎2023, ‏‎1:12:23 PM
-# Modified By: Dooji (doojisbasement@gmail.com)
-
-# Copyright (c) 2023 Dooji
+import sys
 import time
 import os
 import pygetwindow as gw
@@ -49,13 +39,15 @@ def get_active_project_info():
     except IndexError:
         return None, None, None
 
+
 def show_about_dialog(icon, item):
     about_window = tk.Tk()
     about_window.title("About Clickteam Fusion RPC")
     about_window.geometry("300x200")
     about_window.resizable(False, False)
 
-    icon_image = Image.open("dooji.png")
+    icon_path = getattr(sys, "_MEIPASS", os.path.abspath(os.path.dirname(__file__)))
+    icon_image = Image.open(os.path.join(icon_path, "dooji.png"))
     icon_image = icon_image.resize((100, 100))
     icon_photo = ImageTk.PhotoImage(icon_image)
     icon_label = tk.Label(about_window, image=icon_photo)
@@ -71,9 +63,9 @@ def show_about_dialog(icon, item):
 
 
 def create_system_tray_icon():
-    icon_path = "clickteamrpc.png"
+    icon_path = getattr(sys, "_MEIPASS", os.path.abspath(os.path.dirname(__file__)))
     menu = (item('About', show_about_dialog), item('Exit', lambda: os._exit(0)))
-    icon = pystray.Icon("ClickteamRPC", Image.open(icon_path), "Clickteam RPC", menu)
+    icon = pystray.Icon("ClickteamRPC", Image.open(os.path.join(icon_path, "clickteamrpc.png")), "Clickteam RPC", menu)
     return icon
 
 
