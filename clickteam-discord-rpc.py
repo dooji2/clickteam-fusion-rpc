@@ -5,7 +5,7 @@
 # GitHub: https://github.com/dooji2
 # Discord: dooji_
 
-# Last Modified: ‎Monday, ‎June ‎26, ‎2023, ‏‎12:37:01 PM
+# Last Modified: ‎Monday, ‎June ‎26, ‎2023, ‏‎1:12:23 PM
 # Modified By: Dooji (doojisbasement@gmail.com)
 
 # Copyright (c) 2023 Dooji
@@ -62,7 +62,7 @@ def show_about_dialog(icon, item):
     icon_label.image = icon_photo
     icon_label.pack(pady=20)
 
-    credits_label = tk.Label(about_window, text="Author: Dooji\nVersion: 1.0.0\nhttps://github.com/dooji2/clickteam-fusion-rpc/")
+    credits_label = tk.Label(about_window, text="Author: Dooji\nVersion: 1.0.1\nhttps://github.com/dooji2/clickteam-fusion-rpc/")
     credits_label.pack()
 
     about_window.eval('tk::PlaceWindow . center')
@@ -81,6 +81,9 @@ def update_presence():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
 
+    prev_project_name = None
+    start_time = int(time.time())
+
     while True:
         try:
             rpc = Presence(client_id)
@@ -91,7 +94,9 @@ def update_presence():
                     project_name, frame_name, window_title = get_active_project_info()
 
                     if project_name:
-                        start_time = int(time.time())
+                        if project_name != prev_project_name:
+                            start_time = int(time.time())
+                            prev_project_name = project_name
 
                         if frame_name is None:
                             rpc.update(
